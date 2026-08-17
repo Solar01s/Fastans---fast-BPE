@@ -51,7 +51,7 @@ with open("YOUR_DATASET_PATH.json", "r", encoding="utf-8") as f: # example
             dataset.append(text)
 
 # load BPE of model
-enc = fastans(" <end> ")
+enc = fastans(" <end> ") #example
 enc = fastans.load(model.enc, "YOUR_PATH") # example
 
 # additional train BPE at the new dataset
