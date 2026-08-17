@@ -55,14 +55,15 @@ enc = fastans(" <end> ") #example
 enc = fastans.load(model.enc, "YOUR_PATH") # example
 
 # additional train BPE at the new dataset
-model.enc.add("<end>")
-model.enc.add("<think>")
-model.enc.add("</think>")
-model.enc.add("<files>")
-model.enc.add("</files>")
-model.enc.add("<newstep>") # <- These are just examples, you can add any tokens
+enc.add("<end>")
+enc.add("<think>")
+enc.add("</think>")
+enc.add("<files>")
+enc.add("</files>")
+enc.add("<newstep>") # <- These are just examples, you can add any tokens
 
-model.enc.train(" ".join(situations), num_mergers=4000)
+enc.train(" ".join(situations), num_mergers=4000)
+enc.save("bpe_vocab") # example
 ```
 
 # Warning:
