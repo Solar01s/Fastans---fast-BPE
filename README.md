@@ -22,7 +22,7 @@ Fastans is a class with functions
 ```python
 from fastans import fastans
 
-stop_token = "<|EOT|>
+stop_token = "<|EOT|>"
 num_mergers = 200
 bpe = fastans(stop_token)
 
