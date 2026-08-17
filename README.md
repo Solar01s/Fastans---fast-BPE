@@ -18,19 +18,51 @@ This is also a token, only at the numerical level.
 ## Base
 Fastans is a class with functions
 
-## Training exampple
+## Training example
 ```python
 from fastans import fastans
 
-stop_token = "<|EOT|>"
+stop_token = "<|EOT|>" # example, you can do any
 num_mergers = 200
 bpe = fastans(stop_token)
 
 # get your dataset
 text = "YOUR_DATASET" # list or str
+# ^ example
 
 bpe.train(text, num_mergers=num_mergers)
 bpe.save("bpe_vocabulary") # saving in .txt format
+# ^ example
+```
+
+## Training example 2
+```python
+from fastans import fastans
+import re
+
+# prepare dataset
+with open("YOUR_DATASET_PATH.json", "r", encoding="utf-8") as f: # example
+    dataset_r = json.load(f)
+    dataset = []
+    for text in dataset_r[:]:
+        text = re.sub(r"\d*\[.*?\]\d*", "", text, flags=re.DOTALL)
+        text = text.replace("\n", "").strip()
+        if text:
+            dataset.append(text)
+
+# load BPE of model
+enc = fastans(" <end> ")
+enc = fastans.load(model.enc, "YOUR_PATH") # example
+
+# additional train BPE at the new dataset
+model.enc.add("<end>")
+model.enc.add("<think>")
+model.enc.add("</think>")
+model.enc.add("<files>")
+model.enc.add("</files>")
+model.enc.add("<newstep>") # <- These are just examples, you can add any tokens
+
+model.enc.train(" ".join(situations), num_mergers=4000)
 ```
 
 # Warning:
